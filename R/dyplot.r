@@ -31,7 +31,7 @@ dyplot = function(data, xcol=colnames(data)[1], ycol = setdiff(colnames(data),xc
 
 #' Transform a data from to an xts object
 to.xts = function(dat, time.col, interval=NULL, time = dat[[time.col]], fill=!is.null(interval)) {
-  restore.point("to.xts")
+  #restore.point("to.xts")
   drop.rows = duplicated(time) | is.na(time)
   dat = dat[!drop.rows,,drop=FALSE]
   time= time[!drop.rows]
