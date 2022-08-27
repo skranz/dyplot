@@ -8,19 +8,19 @@
 #' @param data a data.frame
 #' @param xcol name of the column with the x-Axis variable. Ideally a datetime object
 #' @param ycol names of the columns that are shown on the yaxis (used for a wide data fram)
-#' @param var_col alternative to ycol for a data frame in long format, the column with the variable name
-#' @param var_col the column with the values for a data frame in long format
+#' @param varcol alternative to ycol for a data frame in long format, the column with the variable name
+#' @param valcol the column with the values for a data frame in long format
 #' @param interval if you have missing rows you can specify the interval of you data, e.g. "day" or "year" or "hour" to fill the gaps
 #' @export
-dyplot = function(data, xcol=colnames(data)[1], ycol = setdiff(colnames(data),xcol), var_col=NULL, val_col=NULL, interval=NULL) {
-  restore.point("dyplot")
+dyplot = function(data, xcol=colnames(data)[1], ycol = setdiff(colnames(data),xcol), varcol=NULL, valcol=NULL, interval=NULL) {
+  #restore.point("dyplot")
   library(dygraphs)
 
   # data in long format
-  if (!is.null(var_col)) {
-    if (is.null(val_col)) stop("If your data is in long format, you must specify both  var_col and val_col")
-    data = data[,c(xcol,var_col, val_col)]
-    data = pivot_wider(data,names_from=all_of(var_col),values_from = all_of(val_col))
+  if (!is.null(varcol)) {
+    if (is.null(valcol)) stop("If your data is in long format, you must specify both  var_col and val_col")
+    data = data[,c(xcol,varcol, valcol)]
+    data = pivot_wider(data,names_from=all_of(varcol),values_from = all_of(valcol))
     ycol = colnames(data)[-1]
   }
 
